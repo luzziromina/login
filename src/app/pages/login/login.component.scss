@@ -1,0 +1,39 @@
+.login__container{
+    width: 100%;
+    min-height: 100vh;
+    background-image: linear-gradient(to right top, #2f4858, #35507d, #654f95, #a53d92, #dc1670);
+    background-color: #2f4858;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    main {   
+        flex: 1 0 auto; 
+        display: flex;
+        align-items: center;
+        .login__section{
+            width: 90%;
+            padding: 20px;
+            border-radius: 20px;
+            background-color: #FFF;
+            
+            h1{
+                margin: 20px 0 40px 0;
+                font-weight: 300;
+                text-align: center;
+                color: #654F97;
+            }
+        }
+    }
+    
+    footer {
+        padding: 20px 0;
+        flex-shrink: 0;   
+        color: #FFF; 
+        a{
+            color: #FFF; 
+            text-decoration: none;
+        }
+    }
+}
