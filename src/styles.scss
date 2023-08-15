@@ -19,3 +19,11 @@ body{
 .mdc-text-field--filled:not(.mdc-text-field--disabled) {
     background-color: transparent;
 }
+
+.failed-snackbar.mat-mdc-snack-bar-container {
+    --mdc-snackbar-container-color: #ce1234;
+}
+
+.sucess-snackbar.mat-mdc-snack-bar-container {
+    --mdc-snackbar-container-color: #14a23f;
+}

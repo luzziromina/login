@@ -3,17 +3,21 @@
         <section class="login__section" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="500">
             <img class="login__section__img" src="assets/user-vector.svg" alt="User Profile Image">
             <h1>LOGIN FORM</h1>
-            <form>
+            <form [formGroup]="loginForm" (ngSubmit)="verify()">
                 <mat-form-field class="example-full-width">
                     <mat-label>Email</mat-label>
-                    <input type="email" matInput>
+                    <input type="email" matInput formControlName="email">
+                    <mat-error *ngIf="loginForm.get('email').hasError('required') && loginForm.get('email').touched">Email is required</mat-error>
+                    <mat-error *ngIf="loginForm.get('email').hasError('email') && loginForm.get('email').touched">Invalid email format</mat-error>
                 </mat-form-field>
                 <mat-form-field class="example-full-width">
                     <mat-label>Password</mat-label>
-                    <input type="password" matInput>
+                    <input type="password" matInput formControlName="password">
+                    <mat-error *ngIf="loginForm.get('password').hasError('required') && loginForm.get('password').touched">Password is required</mat-error>
                 </mat-form-field>
-                <button class="login__section__btn">CONTINUE</button>
+                <button class="login__section__btn" [disabled]="loginForm.invalid">CONTINUE</button>
             </form>
+            <p>Email: <strong>{{this.userDemo.email}}</strong> , Password: <strong>{{this.userDemo.password}}</strong></p>
         </section>
     </main>
     <footer>
