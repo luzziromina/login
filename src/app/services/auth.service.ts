@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { BehaviorSubject, Observable, delay, of, tap } from 'rxjs';
+import { Observable, of, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'

@@ -1,10 +1,79 @@
 <header>
-    <p>Welcome!</p>
-    <button>Logout</button>
+  <p>Welcome!</p>
+  <button>Logout</button>
 </header>
 <main>
-   <h1>Products List</h1> 
+  <div class="container-title">
+    <h1>PRODUCTS LIST</h1>
+    <mat-form-field>
+      <mat-label>Search</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Search" #input />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Select a category</mat-label>
+      <mat-select
+        placeholder="All"
+        (selectionChange)="onCategorySelected($event.value)"
+      >
+        <mat-option [value]="''">All</mat-option>
+        <mat-option *ngFor="let category of categories" [value]="category">
+          {{ category }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="table">
+    <div class="table-row-header" matSort>
+      <div class="row" mat-sort-header="id"><p><strong>ID</strong></p></div>
+      <div class="row" mat-sort-header="title"><p><strong>Title</strong></p></div>
+      <div class="row" mat-sort-header="description"><p><strong>Description</strong></p></div>
+      <div class="row" mat-sort-header="category"><p><strong>Category</strong></p></div>
+      <div class="row" mat-sort-header="price"><p><strong>Price</strong></p></div>
+      <div class="row"><p><strong>Details</strong></p></div>
+    </div>
+    <ng-container *ngIf="!loading; else showSpinner">
+      <ng-container *ngIf="(obsComparations | async)?.length; else noFound">
+        <div
+          *ngFor="let character of this.obsComparations | async; let i = index"
+          data-aos="fade"
+          data-aos-duration="800"
+          [attr.data-aos-delay]="i * 50 + 50"
+        >
+          <div class="table-row-content">
+            <div class="row">
+              <p>{{ character.id }}</p>
+            </div>
+            <div class="row"><p>{{ character.title }}</p></div>
+            <div class="row">
+              <p>{{ character.description }}</p>
+            </div>
+            <div class="row">
+              <p>{{ character.category | titlecase }}</p>
+            </div>
+            <div class="row">
+              <p>{{ character.price }}</p>
+            </div>
+            <div>
+              <button>view</button>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+      <ng-template #noFound>
+        <div class="table-row-no-content">
+          <p>No data matching the filter "{{ input.value }}"</p>
+        </div>
+      </ng-template>
+      <mat-paginator
+        [pageSizeOptions]="[5, 10, 25, 50]"
+        aria-label="Select page of products"
+      ></mat-paginator>
+    </ng-container>
+    <ng-template #showSpinner>
+      <app-spinner></app-spinner>
+    </ng-template>
+  </div>
 </main>
 <footer>
-    
+  <p>© Login Form. All Rights Reserved. Developed by <strong><a href="https://www.linkedin.com/in/romina-luzzi/" target="_blank" rel="Linkedin Profile">codegirl</a></strong></p>
 </footer>

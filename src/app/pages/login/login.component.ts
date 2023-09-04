@@ -27,18 +27,18 @@ export class LoginComponent implements OnInit{
     if(this.loginForm.get('email').value === this.userDemo.email && this.loginForm.get('password').value ===  this.userDemo.password){
       this._authService.login().subscribe((result) => {
         if(result){
-          this.openSnackBar("Sucessfull login :D", "sucess-snackbar");
+          this.openSnackBar("Sucessfull login :D", "sucess-snackbar", 2000);
           this.router.navigate(['/products']); 
         }
       });
     }else{
-      this.openSnackBar("The credentials are not correct. Try again!", "failed-snackbar");
+      this.openSnackBar("The credentials are not correct. Try again!", "failed-snackbar", 5000);
     }
   }
 
-  private openSnackBar = (message: string, panelClass: string) =>{
+  private openSnackBar = (message: string, panelClass: string, time) =>{
     let config = new MatSnackBarConfig();
-    config.duration = 5000;
+    config.duration = time;
     config.panelClass = panelClass;
     this._snackBar.open(message, '', config);
   }
