@@ -13,6 +13,7 @@
       <mat-select
         placeholder="All"
         (selectionChange)="onCategorySelected($event.value)"
+        #category
       >
         <mat-option [value]="''">All</mat-option>
         <mat-option *ngFor="let category of categories" [value]="category">
@@ -65,7 +66,7 @@
       <ng-template #noFound>
         <div class="table__no__content">
           <img class="table__no__content__img" src="assets/no-found.jpg" alt="No found Search Image">
-          <h2>No data matching the filter "{{ input.value }}"</h2>
+          <h2>No data matching the filter "{{ input.value }}" {{ category.value ? 'of ' + category.value : '' }}</h2>
         </div>
       </ng-template>
     </ng-container>
