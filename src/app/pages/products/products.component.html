@@ -1,9 +1,8 @@
 <header>
-  <p>Welcome!</p>
-  <button>Logout</button>
+  <button class="btn" (click)="onLogout()">LOGOUT <mat-icon>exit_to_app</mat-icon></button>
 </header>
 <main>
-  <div class="container-title">
+  <div class="container__title">
     <h1>PRODUCTS LIST</h1>
     <mat-form-field>
       <mat-label>Search</mat-label>
@@ -23,44 +22,44 @@
     </mat-form-field>
   </div>
   <div class="table">
-    <div class="table-row-header" matSort>
+    <div class="table__header" matSort>
       <div class="row" mat-sort-header="id"><p><strong>ID</strong></p></div>
       <div class="row" mat-sort-header="title"><p><strong>Title</strong></p></div>
       <div class="row" mat-sort-header="description"><p><strong>Description</strong></p></div>
       <div class="row" mat-sort-header="category"><p><strong>Category</strong></p></div>
       <div class="row" mat-sort-header="price"><p><strong>Price</strong></p></div>
-      <div class="row"><p><strong>Details</strong></p></div>
+      <div class="row text__center"><p><strong>Details</strong></p></div>
     </div>
     <ng-container *ngIf="!loading; else showSpinner">
-      <ng-container *ngIf="(obsComparations | async)?.length; else noFound">
+      <ng-container *ngIf="(obsProduct | async)?.length; else noFound">
         <div
-          *ngFor="let character of this.obsComparations | async; let i = index"
+          *ngFor="let product of this.obsProduct | async; let i = index"
           data-aos="fade"
           data-aos-duration="800"
           [attr.data-aos-delay]="i * 50 + 50"
         >
-          <div class="table-row-content">
+          <div class="table__content">
             <div class="row">
-              <p>{{ character.id }}</p>
+              <p>{{ product.id }}</p>
             </div>
-            <div class="row"><p>{{ character.title }}</p></div>
+            <div class="row"><p>{{ product.title }}</p></div>
             <div class="row">
-              <p>{{ character.description }}</p>
-            </div>
-            <div class="row">
-              <p>{{ character.category | titlecase }}</p>
+              <p>{{ product.description }}</p>
             </div>
             <div class="row">
-              <p>{{ character.price }}</p>
+              <p>{{ product.category | titlecase }}</p>
+            </div>
+            <div class="row">
+              <p>${{ product.price }}</p>
             </div>
             <div>
-              <button>view</button>
+              <button class="table__content__btn" title="More details" (click)="openModal(product)"><mat-icon>remove_red_eye</mat-icon></button>
             </div>
           </div>
         </div>
       </ng-container>
       <ng-template #noFound>
-        <div class="table-row-no-content">
+        <div class="table__no__content">
           <p>No data matching the filter "{{ input.value }}"</p>
         </div>
       </ng-template>

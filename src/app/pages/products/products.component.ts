@@ -1,11 +1,14 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild, ViewRef } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { Route, Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { IProduct } from 'src/app/models/product.interface';
 import { AuthService } from 'src/app/services/auth.service';
 import { ProductsService } from 'src/app/services/products.service';
+import { ModalComponent } from './components/modal/modal.component';
 
 @Component({
   selector: 'app-products',
@@ -20,12 +23,12 @@ export class ProductsComponent implements OnInit, OnDestroy {
   private subscription: Subscription = new Subscription();
   private dataSource = new MatTableDataSource<IProduct>([]);
   
-  public obsComparations: Observable<IProduct[]>;
+  public obsProduct: Observable<IProduct[]>;
   
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private _productsService: ProductsService, private _authService: AuthService, private changeDetectorRef: ChangeDetectorRef) {}
+  constructor(private _productsService: ProductsService, private _authService: AuthService, private changeDetectorRef: ChangeDetectorRef, private router: Router, public dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.setView();
@@ -41,7 +44,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
             this.changeDetectorRef.detectChanges();
           }
           this.dataSource = new MatTableDataSource<IProduct>(this.products);
-          this.obsComparations = this.dataSource.connect();
+          this.obsProduct = this.dataSource.connect();
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
         }
@@ -67,13 +70,20 @@ export class ProductsComponent implements OnInit, OnDestroy {
     const filteredData = this.products.filter(x => x.category.toLowerCase() === value.toLowerCase());
     this.dataSource.data = filteredData;
   
-    if (!this.obsComparations) {
-      this.obsComparations = this.dataSource.connect();
+    if (!this.obsProduct) {
+      this.obsProduct = this.dataSource.connect();
     }
   }
 
-  onLogout(){
+  public onLogout(){
     this._authService.logout();
+    this.router.navigate(['/admin']); 
+  }
+
+  public openModal(product: IProduct){
+    this.dialog.open(ModalComponent, {
+      data: product,
+    });
   }
 
   ngOnDestroy() {

@@ -1,0 +1,12 @@
+
+
+<div class="container">
+    <button class="btn" (click)="close()" title="Close"><mat-icon>close</mat-icon></button>
+
+    <p>{{ data.category | titlecase }}</p>
+    <img [src]="data.image" alt="{{ data.title }}" width="200px">
+
+    <h1>{{ data.title }}</h1>
+    <p>{{ data.description }}</p>
+    <p class="right">${{ data.price }}</p>
+</div>

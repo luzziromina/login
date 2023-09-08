@@ -16,6 +16,9 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
 import { SpinnerComponent } from './pages/products/components/spinner/spinner.component';
+import {MatIconModule} from '@angular/material/icon';
+import { ModalComponent } from './pages/products/components/modal/modal.component';
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -23,6 +26,7 @@ import { SpinnerComponent } from './pages/products/components/spinner/spinner.co
     LoginComponent,
     ProductsComponent,
     SpinnerComponent,
+    ModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,7 +40,9 @@ import { SpinnerComponent } from './pages/products/components/spinner/spinner.co
     MatSortModule,
     MatPaginatorModule,
     MatFormFieldModule,
-    MatSelectModule
+    MatSelectModule,
+    MatIconModule,
+    MatDialogModule
   ],
   providers: [
     {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 1000}}
