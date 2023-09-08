@@ -57,16 +57,17 @@
             </div>
           </div>
         </div>
+        <mat-paginator
+        [pageSizeOptions]="[5, 10, 25, 50]"
+        aria-label="Select page of products"
+        ></mat-paginator>
       </ng-container>
       <ng-template #noFound>
         <div class="table__no__content">
-          <p>No data matching the filter "{{ input.value }}"</p>
+          <img class="table__no__content__img" src="assets/no-found.jpg" alt="No found Search Image">
+          <h2>No data matching the filter "{{ input.value }}"</h2>
         </div>
       </ng-template>
-      <mat-paginator
-        [pageSizeOptions]="[5, 10, 25, 50]"
-        aria-label="Select page of products"
-      ></mat-paginator>
     </ng-container>
     <ng-template #showSpinner>
       <app-spinner></app-spinner>

@@ -91,6 +91,15 @@ main{
     }
 }
 
+.table__no__content{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 0;
+}
 
 footer {
     margin-top: 100px;
