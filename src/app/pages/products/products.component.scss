@@ -118,7 +118,13 @@ main{
     gap: 20px;
     align-items: center;
     justify-content: center;
+    text-align: center;
     padding: 40px 0;
+
+    &__img{
+        width: 100%;
+        max-width: 400px;
+    }
 }
 
 footer {
