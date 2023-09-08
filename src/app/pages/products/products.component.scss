@@ -32,16 +32,16 @@ main{
 .container__title{
     display: grid;
     grid-template-columns: 2fr 1fr 1fr;
-    h1{
-        grid-area: title;
-    }
-    .search{
-        grid-area: search;
-    }
-    .category{
-        grid-area: category;
-    }
     @media screen and (max-width: 768px) {
+        h1{
+            grid-area: title;
+        }
+        .search{
+            grid-area: search;
+        }
+        .category{
+            grid-area: category;
+        }
         grid-template-columns: inherit;
         grid-template-areas: "title title"
         "search category";
